@@ -47,10 +47,8 @@ class Rating {
   }
 }
 
-Future<ReviewList> getReviewsList() async {}
-
-Future<ReviewList> getOfficesList() async {
-  const url = 'https://about.google/static/data/locations.json';
+Future<ReviewList> getReviewsList() async {
+  const url = 'https://fakestoreapi.com/products';
   final response = await http.get(Uri.parse(url));
 
   if (response.statusCode == 200) {
@@ -59,6 +57,8 @@ Future<ReviewList> getOfficesList() async {
     throw Exception('Error: ${response.reasonPhrase}');
   }
 }
+
+
 
 // Image - вставишь вместе жёлтый иконки, 
 // description - вместе «Очень доброжелательный персонал!», 

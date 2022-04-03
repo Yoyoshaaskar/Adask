@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/ui/pages/widgets/bottomNavBar.dart';
+import 'package:flutter_application_1/ui/pages/widgets/review_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,6 +13,7 @@ enum BottomIcons { home, favorite, search, account }
 
 class _HomePageState extends State<HomePage> {
   BottomIcons bottomIcons = BottomIcons.home;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -20,150 +22,159 @@ class _HomePageState extends State<HomePage> {
           Container(
               decoration:
                   const BoxDecoration(color: Color.fromRGBO(245, 245, 245, 1))),
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(15, 5, 15, 10),
-                child: Container(
-                  height: 300,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    // boxShadow: const [
-                    //   BoxShadow(offset: Offset(0, 1), blurRadius: 40)
-                  ),
-                  child: Column(children: [
-                    const SizedBox(
-                      height: 5,
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 5, 15, 10),
+                  child: Container(
+                    height: 300,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                      // boxShadow: const [
+                      //   BoxShadow(offset: Offset(0, 1), blurRadius: 40)
                     ),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: Container(
-                        alignment: Alignment.center,
-                        height: 54,
-                        width: 54,
-                        decoration: const BoxDecoration(shape: BoxShape.circle),
-                        child: IconButton(
-                          icon: const Icon(
-                            Icons.input,
+                    child: Column(children: [
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 54,
+                          width: 54,
+                          decoration:
+                              const BoxDecoration(shape: BoxShape.circle),
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.input,
+                              color: Color.fromRGBO(61, 183, 222, 1),
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          CircleAvatar(
+                            radius: 50,
+                            backgroundImage: AssetImage('lib/assets/leo.jpeg'),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      const Text(
+                        'Leo Dicaprio',
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 15),
+                      const Text('+7 775 818 81 18'),
+                      const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(
+                            Icons.favorite_outline,
+                            size: 15,
                             color: Color.fromRGBO(61, 183, 222, 1),
                           ),
-                          onPressed: () {},
+                          Text('12'),
+                          SizedBox(width: 30),
+                          Icon(
+                            Icons.star_border,
+                            size: 15,
+                            color: Color.fromRGBO(61, 183, 222, 1),
+                          ),
+                          Text('23'),
+                          SizedBox(width: 30),
+                          Icon(
+                            Icons.image_outlined,
+                            size: 15,
+                            color: Color.fromRGBO(61, 183, 222, 1),
+                          ),
+                          Text('56')
+                        ],
+                      )
+                    ]),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 5, 15, 10),
+                  child: GestureDetector(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      height: 50,
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 8, 10, 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Expanded(
+                                child: Text(
+                              'Редактировать профиль',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            )),
+                            Icon(
+                              Icons.settings,
+                              size: 25,
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        CircleAvatar(
-                          radius: 50,
-                          backgroundImage: AssetImage('lib/assets/leo.jpeg'),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    const Text(
-                      'Leo Dicaprio',
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 15),
-                    const Text('+7 775 818 81 18'),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(
-                          Icons.favorite_outline,
-                          size: 15,
-                          color: Color.fromRGBO(61, 183, 222, 1),
-                        ),
-                        Text('12'),
-                        SizedBox(width: 30),
-                        Icon(
-                          Icons.star_border,
-                          size: 15,
-                          color: Color.fromRGBO(61, 183, 222, 1),
-                        ),
-                        Text('23'),
-                        SizedBox(width: 30),
-                        Icon(
-                          Icons.image_outlined,
-                          size: 15,
-                          color: Color.fromRGBO(61, 183, 222, 1),
-                        ),
-                        Text('56')
-                      ],
-                    )
-                  ]),
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(15, 5, 15, 10),
-                child: GestureDetector(
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+
+                  child: ExpansionTile(
+                    title: Text('dsad'),
+                    children: [ReviewWidget()],
+                  ),
+                  // child: Container(
+                  //   decoration: BoxDecoration(
+                  //     color: Colors.white,
+                  //     borderRadius: BorderRadius.circular(10),
+                  //   ),
+                  //   height: 58,
+                  //   width: double.infinity,
+                  //   child: const ExpansionTile(
+                  //     backgroundColor: Color.fromRGBO(61, 183, 222, 1),
+                  //     textColor: Colors.white,
+                  //     title: Text('Мои отзывы'),
+                  //     iconColor: Colors.white,
+                  //     children: [SingleChildScrollView(child: ReviewWidget())],
+                  //   ),
+                  // ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 5, 15, 15),
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    height: 50,
+                    height: 58,
                     width: double.infinity,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 8, 10, 8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Expanded(
-                              child: Text(
-                            'Редактировать профиль',
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
-                          )),
-                          Icon(
-                            Icons.settings,
-                            size: 25,
-                          ),
-                        ],
-                      ),
+                    child: const ExpansionTile(
+                      backgroundColor: Color.fromRGBO(61, 183, 222, 1),
+                      textColor: Colors.white,
+                      title: Text('Мои фото'),
+                      iconColor: Colors.white,
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  height: 58,
-                  width: double.infinity,
-                  child: const ExpansionTile(
-                    backgroundColor: Color.fromRGBO(61, 183, 222, 1),
-                    textColor: Colors.white,
-                    title: Text('Мои отзывы'),
-                    iconColor: Colors.white,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(15, 5, 15, 15),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  height: 58,
-                  width: double.infinity,
-                  child: const ExpansionTile(
-                    backgroundColor: Color.fromRGBO(61, 183, 222, 1),
-                    textColor: Colors.white,
-                    title: Text('Мои фото'),
-                    iconColor: Colors.white,
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
           Align(
             alignment: Alignment.bottomLeft,
