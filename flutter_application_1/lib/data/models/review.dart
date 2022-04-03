@@ -1,38 +1,63 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter/foundation.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-part 'review.freezed.dart';
-part 'review.g.dart';
+class ReviewList {
+  List<Review> review;
+  List<Rating> rate;
+  ReviewList({required this.review, required this.rate});
 
-@freezed
-class Review with _$Review {
-  const factory Review({
-    required List<Results> results,
-    required Rate rate,
-  }) = _Review;
+  factory ReviewList.fromJson(Map<String, dynamic> json) {
+    var reviewsJson = json['array'] as List;
+    List<Review> reviewsList =
+        reviewsJson.map((i) => Review.fromJson(i)).toList();
+    var ratesJson = json['rating'] as List;
+    List<Rating> ratingsList =
+        ratesJson.map((i) => Rating.fromJson(i)).toList();
 
-  factory Review.fromJson(Map<String, dynamic> json) => _$ReviewFromJson(json);
+    return ReviewList(review: reviewsList, rate: ratingsList);
+  }
 }
 
-@freezed
-class Results with _$Results {
-  const factory Results({
-    required String image,
-    required String description,
-    required String title,
-  }) = _Results;
+class Review {
+  final String image;
+  final String description;
+  final String title;
 
-  factory Results.fromJson(Map<String, dynamic> json) =>
-      _$ResultsFromJson(json);
+  Review({
+    required this.image,
+    required this.description,
+    required this.title,
+  });
+
+  factory Review.fromJson(Map<String, dynamic> json) {
+    return Review(
+        image: json['image'] as String,
+        description: json['description'] as String,
+        title: json['title'] as String);
+  }
 }
 
-@freezed
-class Rate with _$Rate {
-  const factory Rate({
-    required String rate,
-  }) = _Rate;
+class Rating {
+  final String rate;
 
-  factory Rate.fromJson(Map<String, dynamic> json) => _$RateFromJson(json);
+  Rating({required this.rate});
+
+  factory Rating.fromJson(Map<String, dynamic> json) {
+    return Rating(rate: json['rate'] as String);
+  }
+}
+
+Future<ReviewList> getReviewsList() async {}
+
+Future<ReviewList> getOfficesList() async {
+  const url = 'https://about.google/static/data/locations.json';
+  final response = await http.get(Uri.parse(url));
+
+  if (response.statusCode == 200) {
+    return ReviewList.fromJson(json.decode(response.body));
+  } else {
+    throw Exception('Error: ${response.reasonPhrase}');
+  }
 }
 
 // Image - вставишь вместе жёлтый иконки, 
